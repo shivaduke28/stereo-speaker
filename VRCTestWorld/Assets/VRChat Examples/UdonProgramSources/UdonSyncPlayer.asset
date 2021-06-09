@@ -733,7 +733,7 @@ MonoBehaviour:
       flowUIDs: []
       nodeValues:
       - unityObjectValue: {fileID: 0}
-        stringValue: 
+        stringValue: System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|0
     - fullName: UnityEngineMathf.__Clamp__SystemSingle_SystemSingle_SystemSingle__SystemSingle
       uid: cf4ea5a3-29d6-4b3f-ad91-070ca4acd13a
       position: {x: 590, y: 1050}
@@ -1236,7 +1236,7 @@ MonoBehaviour:
       flowUIDs: []
       nodeValues:
       - unityObjectValue: {fileID: 0}
-        stringValue: 
+        stringValue: System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089|0
     - fullName: Get_Variable
       uid: d9d802fe-aea3-45aa-81cb-40c5cac46760
       position: {x: 700, y: 1750}
@@ -2111,7 +2111,7 @@ MonoBehaviour:
     uid: cafe5578-06b9-4a43-b54b-0de0bc0553c8
     jsonData: '{"visible":true,"layout":{"serializedVersion":"2","x":10.0,"y":20.0,"width":0.0,"height":0.0}}'
   viewTransform:
-    position: {x: 465.9811, y: -3964.1965}
-    scale: 0.7561437
+    position: {x: -818.67706, y: -2734.6912}
+    scale: 0.65751624
   version: 1.0.0
-  showAssembly: 0
+  showAssembly: 1
