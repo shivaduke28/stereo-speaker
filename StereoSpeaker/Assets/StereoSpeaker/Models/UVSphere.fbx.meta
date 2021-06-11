@@ -1,14 +1,14 @@
 fileFormatVersion: 2
-guid: 6599f57ea180c9742a15d6977bd86f72
+guid: 9ae71d1d63031e546876c174b6ba8840
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: Material.002
+    2100000: No Name
     2300000: //RootNode
     3300000: //RootNode
-    4300000: InvertedBox
+    4300000: UVSphere
   externalObjects: {}
   materials:
     importMaterials: 0
@@ -49,7 +49,7 @@ ModelImporter:
     importCameras: 1
     importLights: 1
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
