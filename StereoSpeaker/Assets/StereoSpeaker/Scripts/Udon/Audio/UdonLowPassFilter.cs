@@ -18,6 +18,12 @@ public class UdonLowPassFilter : UdonSharpBehaviour
     [SerializeField] private Slider lowPassResonanceQ;
     [SerializeField] private Text lowPassResonanceQText;
 
+    [SerializeField] private Toggle toggle;
+    public void OnToggle()
+    {
+        filter.enabled = toggle.isOn;
+    }
+
     private void Start()
     {
         CopyFilterToUI();
@@ -26,7 +32,7 @@ public class UdonLowPassFilter : UdonSharpBehaviour
     public void OnCutoffFrequencyChange()
     {
         filter.cutoffFrequency = cutoffFrequency.value;
-        cutoffFrequencyText.text = filter.cutoffFrequency.ToString("N1");
+        cutoffFrequencyText.text = Mathf.CeilToInt(filter.cutoffFrequency).ToString();
     }
 
     public void OnLowpassResonanceQChange()
@@ -37,12 +43,15 @@ public class UdonLowPassFilter : UdonSharpBehaviour
 
     public void CopyFilterToUI()
     {
+        toggle.isOn = filter.enabled;
+
         cutoffFrequency.value = filter.cutoffFrequency;
         lowPassResonanceQ.value = filter.lowpassResonanceQ;
-        cutoffFrequencyText.text = filter.cutoffFrequency.ToString("N1");
+        cutoffFrequencyText.text = Mathf.CeilToInt(filter.cutoffFrequency).ToString();
         lowPassResonanceQText.text = filter.lowpassResonanceQ.ToString("N1");
 
 #if UNITY_EDITOR && !COMPILER_UDONSHARP
+        EditorUtility.SetDirty(toggle);
         EditorUtility.SetDirty(lowPassResonanceQ);
         EditorUtility.SetDirty(lowPassResonanceQText);
         EditorUtility.SetDirty(cutoffFrequency);

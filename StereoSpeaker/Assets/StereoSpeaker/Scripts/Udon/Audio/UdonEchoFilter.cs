@@ -21,6 +21,12 @@ public class UdonEchoFilter : UdonSharpBehaviour
     [SerializeField] private Slider dryMix;
     [SerializeField] private Text dryMixText;
 
+    [SerializeField] private Toggle toggle;
+    public void OnToggle()
+    {
+        filter.enabled = toggle.isOn;
+    }
+
     public void Start()
     {
         CopyFilterToUI();
@@ -29,7 +35,7 @@ public class UdonEchoFilter : UdonSharpBehaviour
     public void OnDelayChange()
     {
         filter.delay = delay.value;
-        delayText.text = filter.delay.ToString("N1");
+        delayText.text = Mathf.CeilToInt(filter.delay).ToString();
     }
 
     public void OnDecayRatioChange()
@@ -52,17 +58,19 @@ public class UdonEchoFilter : UdonSharpBehaviour
 
     public void CopyFilterToUI()
     {
+        toggle.isOn = filter.enabled;
         delay.value = filter.delay;
         decayRatio.value = filter.decayRatio;
         wetMix.value = filter.wetMix;
         dryMix.value = filter.dryMix;
 
-        delayText.text = filter.delay.ToString("N1");
+        delayText.text = Mathf.CeilToInt(filter.delay).ToString();
         decayRatioText.text = filter.decayRatio.ToString("N1");
         wetMixText.text = filter.wetMix.ToString("N1");
         dryMixText.text = filter.dryMix.ToString("N1");
 
 #if UNITY_EDITOR && !COMPILER_UDONSHARP
+        EditorUtility.SetDirty(toggle);
         EditorUtility.SetDirty(delay);
         EditorUtility.SetDirty(decayRatio);
         EditorUtility.SetDirty(wetMix);

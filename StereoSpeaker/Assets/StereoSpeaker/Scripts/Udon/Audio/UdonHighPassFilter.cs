@@ -20,6 +20,12 @@ public class UdonHighPassFilter : UdonSharpBehaviour
     [SerializeField] private Text highpassResonanceQText;
 
 
+    [SerializeField] private Toggle toggle;
+    public void OnToggle()
+    {
+        filter.enabled = toggle.isOn;
+    }
+
     private void Start()
     {
         CopyFilterToUI();
@@ -28,7 +34,7 @@ public class UdonHighPassFilter : UdonSharpBehaviour
     public void OnCutoffFrequencyChange()
     {
         filter.cutoffFrequency = cutoffFrequency.value;
-        cutoffFrequencyText.text = filter.cutoffFrequency.ToString("N1");
+        cutoffFrequencyText.text = Mathf.CeilToInt(filter.cutoffFrequency).ToString();
     }
 
     public void OnLowpassResonanceQChange()
@@ -39,12 +45,15 @@ public class UdonHighPassFilter : UdonSharpBehaviour
 
     public void CopyFilterToUI()
     {
+        toggle.isOn = filter.enabled;
+
         cutoffFrequency.value = filter.cutoffFrequency;
         highpassResonanceQ.value = filter.highpassResonanceQ;
-        cutoffFrequencyText.text = filter.cutoffFrequency.ToString("N1");
+        cutoffFrequencyText.text = Mathf.CeilToInt(filter.cutoffFrequency).ToString();
         highpassResonanceQText.text = filter.highpassResonanceQ.ToString("N1");
 
 #if UNITY_EDITOR && !COMPILER_UDONSHARP
+        EditorUtility.SetDirty(toggle);
         EditorUtility.SetDirty(highpassResonanceQ);
         EditorUtility.SetDirty(highpassResonanceQText);
         EditorUtility.SetDirty(cutoffFrequency);

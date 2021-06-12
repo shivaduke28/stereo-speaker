@@ -13,6 +13,7 @@ using UnityEditor;
 public class UdonChorusFilter : UdonSharpBehaviour
 {
     [SerializeField] private AudioChorusFilter filter;
+    [SerializeField] private Toggle toggle;
     [SerializeField] private Slider dryMix;
     [SerializeField] private Text dryMixText;
     [SerializeField] private Slider wetMix1;
@@ -31,6 +32,11 @@ public class UdonChorusFilter : UdonSharpBehaviour
     public void Start()
     {
         CopyFilterToUI();
+    }
+
+    public void OnToggle()
+    {
+        filter.enabled = toggle.isOn;
     }
 
     public void OnDryMixChange()
@@ -76,6 +82,7 @@ public class UdonChorusFilter : UdonSharpBehaviour
 
     public void CopyFilterToUI()
     {
+        toggle.isOn = filter.enabled;
         dryMix.value = filter.dryMix;
         wetMix1.value = filter.wetMix1;
         wetMix2.value = filter.wetMix2;
@@ -93,6 +100,7 @@ public class UdonChorusFilter : UdonSharpBehaviour
         depthText.text = filter.depth.ToString("N1");
 
 #if UNITY_EDITOR && !COMPILER_UDONSHARP
+        EditorUtility.SetDirty(toggle);
         EditorUtility.SetDirty(dryMix);
         EditorUtility.SetDirty(wetMix1);
         EditorUtility.SetDirty(wetMix2);

@@ -16,6 +16,12 @@ public class UdonDistortionFilter : UdonSharpBehaviour
     [SerializeField] private Slider distotionLevel;
     [SerializeField] private Text distortionLevelText;
 
+    [SerializeField] private Toggle toggle;
+    public void OnToggle()
+    {
+        filter.enabled = toggle.isOn;
+    }
+
     public void Start()
     {
         CopyFilterToUI();
@@ -29,9 +35,11 @@ public class UdonDistortionFilter : UdonSharpBehaviour
 
     public void CopyFilterToUI()
     {
+        toggle.isOn = filter.enabled;
         distotionLevel.value = filter.distortionLevel;
         distortionLevelText.text = filter.distortionLevel.ToString("N1");
 #if UNITY_EDITOR && !COMPILER_UDONSHARP
+        EditorUtility.SetDirty(toggle);
         EditorUtility.SetDirty(distotionLevel);
         EditorUtility.SetDirty(distortionLevelText);
 #endif

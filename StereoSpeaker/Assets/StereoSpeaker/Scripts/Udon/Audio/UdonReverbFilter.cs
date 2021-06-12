@@ -41,29 +41,34 @@ public class UdonReverbFilter : UdonSharpBehaviour
     [SerializeField] private Slider density;
     [SerializeField] private Text densityText;
 
+    [SerializeField] private Toggle toggle;
+    public void OnToggle()
+    {
+        filter.enabled = toggle.isOn;
+    }
+
     public void OnDryLevelChange()
     {
         filter.dryLevel = dryLevel.value;
-        dryLevelText.text = filter.dryLevel.ToString("N1");
+        dryLevelText.text = Mathf.CeilToInt(filter.dryLevel).ToString();
     }
 
     public void OnRoomChange()
     {
         filter.room = room.value;
-        roomText.text = filter.room.ToString("N1");        
-
+        roomText.text = Mathf.CeilToInt(filter.room).ToString();
     }
 
     public void OnRoomHFChange()
     {
         filter.roomHF = roomHF.value;
-        roomHFText.text = filter.roomHF.ToString("N1");
+        roomHFText.text = Mathf.CeilToInt(filter.roomHF).ToString();
     }
 
     public void OnRoomLFChange()
     {
         filter.roomLF = roomLF.value;
-        roomLFText.text = filter.roomLF.ToString("N1");
+        roomLFText.text = Mathf.CeilToInt(filter.roomLF).ToString();
     }
 
     public void OnDecayTimeChange()
@@ -81,7 +86,7 @@ public class UdonReverbFilter : UdonSharpBehaviour
     public void OnReflectionsLevelChange()
     {
         filter.reflectionsLevel = reflectionsLevel.value;
-        reflectionsLevelText.text = filter.reflectionsLevel.ToString("N1");
+        reflectionsLevelText.text = Mathf.CeilToInt(filter.reflectionsLevel).ToString();
     }
 
     public void OnReflectionsDelayChange()
@@ -93,7 +98,7 @@ public class UdonReverbFilter : UdonSharpBehaviour
     public void OnReverbLevelChange()
     {
         filter.reverbLevel = reverbDelay.value;
-        reverbLevelText.text = filter.reverbLevel.ToString("N1");
+        reverbLevelText.text = Mathf.CeilToInt(filter.reverbLevel).ToString();
     }
 
     public void OnReverbDelayChange()
@@ -105,13 +110,13 @@ public class UdonReverbFilter : UdonSharpBehaviour
     public void OnHfReferenceChange()
     {
         filter.hfReference = hfReference.value;
-        hfReferenceText.text = filter.hfReference.ToString("N1");
+        hfReferenceText.text = Mathf.CeilToInt(filter.hfReference).ToString();
     }
 
     public void OnLfReferenceChange()
     {
         filter.lfReference = lfReference.value;
-        lfReferenceText.text = filter.lfReference.ToString("N1");
+        lfReferenceText.text = Mathf.CeilToInt(filter.lfReference).ToString();
     }
 
     public void OnDiffusionChange()
@@ -128,6 +133,7 @@ public class UdonReverbFilter : UdonSharpBehaviour
 
     public void CopyFilterToUI()
     {
+        toggle.isOn = filter.enabled;
         dryLevel.value = filter.dryLevel;
         room.value = filter.room;
         roomHF.value = filter.roomHF;
@@ -143,22 +149,23 @@ public class UdonReverbFilter : UdonSharpBehaviour
         diffusion.value = filter.diffusion;
         density.value = filter.density;
 
-        dryLevelText.text = filter.dryLevel.ToString("N1");
-        roomText.text = filter.room.ToString("N1");
-        roomHFText.text = filter.roomHF.ToString("N1");
-        roomLFText.text = filter.roomLF.ToString("N1");
+        dryLevelText.text = Mathf.CeilToInt(filter.dryLevel).ToString();
+        roomText.text = Mathf.CeilToInt(filter.room).ToString();
+        roomHFText.text = Mathf.CeilToInt(filter.roomHF).ToString();
+        roomLFText.text = Mathf.CeilToInt(filter.roomLF).ToString();
         decayTimeText.text = filter.decayTime.ToString("N1");
         decayHFRatioText.text = filter.decayHFRatio.ToString("N1");
-        reflectionsLevelText.text = filter.reflectionsLevel.ToString("N1");
+        reflectionsLevelText.text = Mathf.CeilToInt(filter.reflectionsLevel).ToString();
         reflectionsDelayText.text = filter.reflectionsDelay.ToString("N1");
-        reverbLevelText.text = filter.reverbLevel.ToString("N1");
+        reverbLevelText.text = Mathf.CeilToInt(filter.reverbLevel).ToString();
         reverbDelayText.text = filter.reverbDelay.ToString("N1");
-        hfReferenceText.text = filter.hfReference.ToString("N1");
-        lfReferenceText.text = filter.lfReference.ToString("N1");
+        hfReferenceText.text = Mathf.CeilToInt(filter.hfReference).ToString();
+        lfReferenceText.text = Mathf.CeilToInt(filter.lfReference).ToString();
         diffusionText.text = filter.diffusion.ToString("N1");
         densityText.text = filter.density.ToString("N1");
 
 #if UNITY_EDITOR && !COMPILER_UDONSHARP
+        EditorUtility.SetDirty(toggle);
         EditorUtility.SetDirty(dryLevel);
         EditorUtility.SetDirty(room);
         EditorUtility.SetDirty(roomHF);
