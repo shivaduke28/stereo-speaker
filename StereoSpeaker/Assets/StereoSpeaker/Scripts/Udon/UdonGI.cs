@@ -4,9 +4,9 @@ using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
 
-namespace StereoSpeaker
+namespace StereoSpeaker.Udon
 {
-    public class GI : UdonSharpBehaviour
+    public class UdonGI : UdonSharpBehaviour
     {
         [SerializeField] private Renderer giRenderer;
 
